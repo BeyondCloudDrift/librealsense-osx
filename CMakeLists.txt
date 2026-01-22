@@ -8,6 +8,8 @@ project( ${LRS_TARGET} LANGUAGES CXX C )
 set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${REPO_ROOT})
 
+set(CMAKE_PREFIX_PATH "/opt/homebrew/Cellar/glfw/3.4/lib/, /Users/poet/codes/libusb/libusb-1.0.29/libs/")
+
 include(CMake/lrs_options.cmake)
 include(CMake/connectivity_check.cmake)
 #Deprecation message, should be removed in future releases
@@ -90,7 +92,7 @@ include(CMake/install_config.cmake)
 
 add_subdirectory(wrappers)
 if ( ( BUILD_EXAMPLES OR BUILD_PC_STITCHING ) AND BUILD_GLSL_EXTENSIONS )
-    find_package(glfw3 3.3 QUIET)
+    find_package(glfw3 3.4 QUIET PATHS "/opt/homebrew/Cellar/glfw/3.4/lib/" NO_DEFAULT_PATH)
     if(NOT TARGET glfw)
         message(STATUS "GLFW 3.3 not found; using internal version")
         set(GLFW_INSTALL ON CACHE BOOL "" FORCE)

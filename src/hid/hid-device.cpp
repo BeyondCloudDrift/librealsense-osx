@@ -255,6 +255,9 @@ namespace librealsense
             }
 
             sensor_data data{};
+            if ((report.reportId != REPORT_ID_GYROMETER_3D) && (report.reportId != REPORT_ID_ACCELEROMETER_3D) && (report.reportId != REPORT_ID_CUSTOM)) {
+                return;
+            }
             data.sensor = { _id_to_sensor[report.reportId] };
 
             hid_data hid{};

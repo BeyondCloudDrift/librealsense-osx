@@ -201,6 +201,11 @@ void hid_sensor::start( rs2_frame_callback_sptr callback )
                 std::lock_guard< std::mutex > lock( _configure_lock );
                 request = _configured_profiles[sensor_name];
             }
+            if (request == nullptr)
+            {
+                return;
+            }
+
             bool is_custom_sensor = false;
             static const uint32_t custom_source_id_offset = 16;
             uint8_t custom_gpio = 0;

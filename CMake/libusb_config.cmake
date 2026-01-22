@@ -1,6 +1,10 @@
 if (NOT TARGET usb)
-    find_library(LIBUSB_LIB usb-1.0)
-    find_path(LIBUSB_INC libusb.h HINTS PATH_SUFFIXES libusb-1.0)
+    find_library(LIBUSB_LIB usb-1.0 /Users/poet/codes/libusb/libusb-1.0.29/libs/lib)
+    # find_path(LIBUSB_INC libusb.h libusb-1.0 /Users/poet/codes/libusb/libusb-1.0.29/libs/include HINTS PATH_SUFFIXES)
+    find_path(LIBUSB_INC libusb.h
+        HINTS /Users/poet/codes/libusb/libusb-1.0.29/libs/include
+        PATH_SUFFIXES libusb-1.0
+    )
     include(FindPackageHandleStandardArgs)
     find_package_handle_standard_args(usb "libusb not found; using internal version" LIBUSB_LIB LIBUSB_INC)
     if (USB_FOUND AND NOT USE_EXTERNAL_USB)

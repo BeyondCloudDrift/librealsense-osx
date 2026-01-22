@@ -282,7 +282,7 @@ static io_service_t hidapi_IOHIDDeviceGetService(IOHIDDeviceRef device)
      * and the fallback method will be used.
      */
     if (iokit_framework == NULL) {
-        iokit_framework = dlopen("/System/Library/IOKit.framework/IOKit", RTLD_LAZY);
+        iokit_framework = dlopen("/System/Library/Frameworks/IOKit.framework/IOKit", RTLD_LAZY);
         
         if (iokit_framework != NULL)
             dynamic_IOHIDDeviceGetService = (io_service_t (*)(IOHIDDeviceRef))dlsym(iokit_framework, "IOHIDDeviceGetService");
@@ -906,7 +906,12 @@ ret:
 
 int HID_API_EXPORT hid_read(hidapi_device *dev, unsigned char *data, size_t length)
 {
-    return hid_read_timeout(dev, data, length, (dev->blocking)? -1: 0);
+    if (dev != NULL)
+        return hid_read_timeout(dev, data, length, (dev->blocking)? -1: 0);
+    else
+    {
+        return -1;
+    }
 }
 
 int HID_API_EXPORT hid_set_nonblocking(hidapi_device *dev, int nonblock)

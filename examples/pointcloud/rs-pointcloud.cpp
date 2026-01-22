@@ -27,7 +27,9 @@ int main(int argc, char * argv[]) try
     rs2::pipeline pipe;
     // Start streaming with default recommended configuration
     pipe.start();
-
+    
+    fprintf(stderr,"Driver Debug [%s:%d], pipeline start OK\n", __FUNCTION__,__LINE__);
+fflush(stdout);
     while (app) // Application still alive?
     {
         // Wait for the next set of frames from the camera

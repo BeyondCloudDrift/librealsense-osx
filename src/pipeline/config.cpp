@@ -140,6 +140,10 @@ namespace librealsense
 
         std::shared_ptr<profile> config::resolve(std::shared_ptr<device_interface> dev)
         {
+            if (!dev) {
+                return;
+            }
+  
             util::config config;
             util::config filtered_config;
 
